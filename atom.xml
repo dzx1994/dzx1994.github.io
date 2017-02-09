@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-02-08T11:22:56.906Z</updated>
+  <updated>2017-02-09T09:03:18.464Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2017/02/06/SeanDong&#39;s%202017/"/>
     <id>http://yoursite.com/2017/02/06/SeanDong&#39;s 2017/</id>
     <published>2017-02-06T08:13:30.000Z</published>
-    <updated>2017-02-08T11:22:56.906Z</updated>
+    <updated>2017-02-09T09:03:18.464Z</updated>
     
     <content type="html"><![CDATA[<p><strong>前言</strong></p>
 <p>2017年（开工）的第一篇博客，也是用Github Pages写的第一篇博客。也算是换种方式和风格来写博客，之前都是在CSDN写，风格就像记笔记一样，内容也是大杂烩，google一搜一大把。之前CSDN写的博客就让它自生自灭吧。</p>
@@ -46,7 +46,11 @@
 <blockquote>
 <p>最最最重要的：</p>
 </blockquote>
-<p>认认真真经营好和我女朋友的感情。</p>
+<p>认认真真经营好和我女朋                    </p>
+<blockquote>
+<p> 欢迎关注我的微信公众号 BugsDeveloper，第一时间获取文章更新以及更多原创干货分享！</p>
+<p>   <img src="http://i.imgur.com/dOUqOLG.jpg" alt=""></p>
+</blockquote>
 ]]></content>
     
     <summary type="html">
