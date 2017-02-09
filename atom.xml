@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>BugsDeveloper</title>
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2017-02-08T11:22:56.906Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>Sean Dong</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>SeanDong&#39;s 2017</title>
+    <link href="http://yoursite.com/2017/02/06/SeanDong&#39;s%202017/"/>
+    <id>http://yoursite.com/2017/02/06/SeanDong&#39;s 2017/</id>
+    <published>2017-02-06T08:13:30.000Z</published>
+    <updated>2017-02-08T11:22:56.906Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>前言</strong></p>
+<p>2017年（开工）的第一篇博客，也是用Github Pages写的第一篇博客。也算是换种方式和风格来写博客，之前都是在CSDN写，风格就像记笔记一样，内容也是大杂烩，google一搜一大把。之前CSDN写的博客就让它自生自灭吧。</p>
+<p><strong>回顾2016</strong></p>
+<p>2016年7月正式踏入社会，带着对未来的憧憬南下深圳，第一份工作很顺利，但也很坑，一家上市公司的分公司，入职后发现居然类似于外包公司，做完一个项目拍屁股拜拜了，第二份工作找的比较认真，最后一家做大数据的初创公司吸引了我，我的职责是开发一款强大的数据采集App兼Android逆向开发和App破解。</p>
+<blockquote>
+<p>2016的遗憾：</p>
+</blockquote>
+<p>错过了校招，但是金子总会发光；没有处理好生活和工作的关系，2017加以改正；没有一场说走就走的旅行。</p>
+<p><strong>展望2017</strong></p>
+<blockquote>
+<p>博客：</p>
+</blockquote>
+<p>认真对待博客，运营一个微信公众号。微信文章，博客同步更新，每周一更，文章内容争取全部原创，大多数为google搜索不到或不全的，以及自己开发中的一些经验和心得。</p>
+<blockquote>
+<p>工作：</p>
+</blockquote>
+<p>全身心投入工作中，学会一日三省；写出star 200+的开源项目；搞定python；多交流总结。</p>
+<blockquote>
+<p>生活：</p>
+</blockquote>
+<p>一周不少于三次健身；至少一场旅游；学会处理生活琐事，家务样样精通。</p>
+<blockquote>
+<p>最最最重要的：</p>
+</blockquote>
+<p>认认真真经营好和我女朋友的感情。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;前言&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;2017年（开工）的第一篇博客，也是用Github Pages写的第一篇博客。也算是换种方式和风格来写博客，之前都是在CSDN写，风格就像记笔记一样，内容也是大杂烩，google一搜一大把。之前CSDN写的博客就让它自生
+    
+    </summary>
+    
+      <category term="life" scheme="http://yoursite.com/categories/life/"/>
+    
+    
+      <category term="plan" scheme="http://yoursite.com/tags/plan/"/>
+    
+  </entry>
+  
+</feed>
