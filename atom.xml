@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-02-21T08:16:37.703Z</updated>
+  <updated>2017-02-21T09:05:19.974Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2017/02/17/Reflection-in-Android/"/>
     <id>http://yoursite.com/2017/02/17/Reflection-in-Android/</id>
     <published>2017-02-17T08:32:31.000Z</published>
-    <updated>2017-02-21T08:16:37.703Z</updated>
+    <updated>2017-02-21T09:05:19.974Z</updated>
     
     <content type="html"><![CDATA[<p><strong>反射简介：</strong></p>
 <p>官方定义：反射主要是指程序可以访问、检测和修改它本身状态或行为的一种能力。在计算机科学领域，反射是一类应用，它们能够自描述和自控制。这类应用通过某种机制来实现对自己行为的描述和检测，并能根据自身行为的状态和结果，调整或修改应用所描述行为的状态和相关的语义。</p>
