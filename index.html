@@ -409,9 +409,41 @@ Method[] getDeclaredMethods() -- 获得类声明的所有方法
 </code></pre><p>类CLASS、METHOD、CONSTRUCTOR、FIELD都有一个PUBLIC方法INT GETMODIFIERS()。该方法返回一个INT类型的数，表示被修饰对象（ CLASS、 METHOD、 CONSTRUCTOR、 FIELD ）的修饰类型的组合值。</p>
 <p><strong>反射在Android中的应用：</strong></p>
 <ol>
-<li>利用反射调用官方隐藏的API：</li>
+<li><p>利用反射调用官方隐藏的API：</p>
+<p>例如：通过反射来控制Toast的显示时间（Toast的hide方法是隐藏的）：</p>
+<p> public class MyToast{<br> Context context= null;<br> Object obj = null;</p>
+<pre><code>public MyToast(Context context,String text){
+this.context =context;
+Toast toast =Toast.makeText(context, text,1);
+try{
+</code></pre><p>  Field field = toast.getClass().getDeclaredField(“mTN”);<br>  field.setAccessible(true);<br>  obj =field.get(toast);</p>
+<pre><code>}catch(Exception e) { 
+ e.printStackTrace();
+</code></pre><p>  }<br> }<br> public void show(){<br> try{<br>   //android4.0以上就要以下处理<br>   Field mNextViewField=obj.getClass().getDeclaredField(“mNextView”);<br>   mNextViewField.setAccessible(true);<br>   LayoutInflater inflate = (LayoutInflater) context.getSystemService</p>
+<pre><code>(Context.LAYOUT_INFLATER_SERVICE);
+</code></pre><p>   View v = inflate.inflate(R.layout.ui_toast, null); </p>
+<pre><code>mNextViewField.set(obj, v);
+</code></pre><p>   Method method =obj.getClass().getDeclaredMethod(“show”,null);<br>   method.invoke(obj,null);<br>  }catch(Exception e) {  </p>
+<pre><code>e.printStackTrace();
+</code></pre><p>  }<br> }<br>  public void hide(){<br>  try{<br>   Method method =obj.getClass().getDeclaredMethod(“hide”,null);<br>   method.invoke(obj,null);<br>   }catch (Exception e) {<br>   e.printStackTrace();<br>   }</p>
+<pre><code>}
+</code></pre><p> }</p>
+</li>
 </ol>
-<p>例如：通过反射来控制Toast的显示时间：</p>
+<p>2.class对象动态生成，这个搭配java的属性文件来实现：</p>
+<p>  例如接口的多实现:</p>
+<pre><code> 在assets文件夹中新建一个`xxx.properties`属性文件，
+
+    Properties prop = new Properties();
+    InputStream fis = Context.getAssets().open(&quot;xxx.properties&quot;);        
+    prop.load(fis);
+    String value = prop.getProperty(&quot;key&quot;);
+
+xxx.properties文件格式如下：
+   key=value
+
+ 最后Class.forName(value).newInstance()；就可得到对象。
+</code></pre><p>3.通过反射机制获取泛型类型：</p>
 
           
         
