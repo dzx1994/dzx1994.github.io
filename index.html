@@ -411,47 +411,47 @@ Method[] getDeclaredMethods() -- 获得类声明的所有方法
 <ol>
 <li><p>利用反射调用官方隐藏的API：</p>
 <p>例如：通过反射来控制Toast的显示时间（Toast的hide方法是隐藏的）：</p>
-<p> public class MyToast {</p>
-<pre><code>Context context = null;
-Object obj = null;
+<pre><code> public class MyToast {
+    Context context = null;
+    Object obj = null;
 
-public MyToast(Context context, String text) {
-    this.context = context;
-    Toast toast = Toast.makeText(context, text, 1);
-    try {
-        Field field = toast.getClass().getDeclaredField(&quot;mTN&quot;);
-        field.setAccessible(true);
-        obj = field.get(toast);
-    } catch (Exception e) {
-        e.printStackTrace();
+    public MyToast(Context context, String text) {
+        this.context = context;
+        Toast toast = Toast.makeText(context, text, 1);
+        try {
+            Field field = toast.getClass().getDeclaredField(&quot;mTN&quot;);
+            field.setAccessible(true);
+            obj = field.get(toast);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void show() {
+        try {
+            // android4.0以上就要以下处理
+            Field mNextViewField = obj.getClass().getDeclaredField(&quot;mNextView&quot;);
+            mNextViewField.setAccessible(true);
+            LayoutInflater inflate = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View v = inflate.inflate(R.layout.ui_toast, null);
+            mNextViewField.set(obj, v);
+            Method method = obj.getClass().getDeclaredMethod(&quot;show&quot;, null);
+            method.invoke(obj, null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void hide() {
+        try {
+            Method method = obj.getClass().getDeclaredMethod(&quot;hide&quot;, null);
+            method.invoke(obj, null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
-
-public void show() {
-    try {
-        // android4.0以上就要以下处理
-        Field mNextViewField = obj.getClass().getDeclaredField(&quot;mNextView&quot;);
-        mNextViewField.setAccessible(true);
-        LayoutInflater inflate = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View v = inflate.inflate(R.layout.ui_toast, null);
-        mNextViewField.set(obj, v);
-        Method method = obj.getClass().getDeclaredMethod(&quot;show&quot;, null);
-        method.invoke(obj, null);
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-}
-
-public void hide() {
-    try {
-        Method method = obj.getClass().getDeclaredMethod(&quot;hide&quot;, null);
-        method.invoke(obj, null);
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-}
-</code></pre><p> }</p>
-</li>
+</code></pre></li>
 </ol>
 <p>2.class对象动态生成，这个搭配java的属性文件来实现：</p>
 <p>  例如接口的多实现:</p>

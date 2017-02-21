@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-02-21T06:50:22.370Z</updated>
+  <updated>2017-02-21T06:51:45.241Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2017/02/17/Reflection-in-Android/"/>
     <id>http://yoursite.com/2017/02/17/Reflection-in-Android/</id>
     <published>2017-02-17T08:32:31.000Z</published>
-    <updated>2017-02-21T06:50:22.370Z</updated>
+    <updated>2017-02-21T06:51:45.241Z</updated>
     
     <content type="html"><![CDATA[<p><strong>反射简介：</strong></p>
 <p>官方定义：反射主要是指程序可以访问、检测和修改它本身状态或行为的一种能力。在计算机科学领域，反射是一类应用，它们能够自描述和自控制。这类应用通过某种机制来实现对自己行为的描述和检测，并能根据自身行为的状态和结果，调整或修改应用所描述行为的状态和相关的语义。</p>
@@ -59,47 +59,47 @@ Method[] getDeclaredMethods() -- 获得类声明的所有方法
 <ol>
 <li><p>利用反射调用官方隐藏的API：</p>
 <p>例如：通过反射来控制Toast的显示时间（Toast的hide方法是隐藏的）：</p>
-<p> public class MyToast {</p>
-<pre><code>Context context = null;
-Object obj = null;
+<pre><code> public class MyToast {
+    Context context = null;
+    Object obj = null;
 
-public MyToast(Context context, String text) {
-    this.context = context;
-    Toast toast = Toast.makeText(context, text, 1);
-    try {
-        Field field = toast.getClass().getDeclaredField(&quot;mTN&quot;);
-        field.setAccessible(true);
-        obj = field.get(toast);
-    } catch (Exception e) {
-        e.printStackTrace();
+    public MyToast(Context context, String text) {
+        this.context = context;
+        Toast toast = Toast.makeText(context, text, 1);
+        try {
+            Field field = toast.getClass().getDeclaredField(&quot;mTN&quot;);
+            field.setAccessible(true);
+            obj = field.get(toast);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void show() {
+        try {
+            // android4.0以上就要以下处理
+            Field mNextViewField = obj.getClass().getDeclaredField(&quot;mNextView&quot;);
+            mNextViewField.setAccessible(true);
+            LayoutInflater inflate = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View v = inflate.inflate(R.layout.ui_toast, null);
+            mNextViewField.set(obj, v);
+            Method method = obj.getClass().getDeclaredMethod(&quot;show&quot;, null);
+            method.invoke(obj, null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void hide() {
+        try {
+            Method method = obj.getClass().getDeclaredMethod(&quot;hide&quot;, null);
+            method.invoke(obj, null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
-
-public void show() {
-    try {
-        // android4.0以上就要以下处理
-        Field mNextViewField = obj.getClass().getDeclaredField(&quot;mNextView&quot;);
-        mNextViewField.setAccessible(true);
-        LayoutInflater inflate = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View v = inflate.inflate(R.layout.ui_toast, null);
-        mNextViewField.set(obj, v);
-        Method method = obj.getClass().getDeclaredMethod(&quot;show&quot;, null);
-        method.invoke(obj, null);
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-}
-
-public void hide() {
-    try {
-        Method method = obj.getClass().getDeclaredMethod(&quot;hide&quot;, null);
-        method.invoke(obj, null);
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-}
-</code></pre><p> }</p>
-</li>
+</code></pre></li>
 </ol>
 <p>2.class对象动态生成，这个搭配java的属性文件来实现：</p>
 <p>  例如接口的多实现:</p>
