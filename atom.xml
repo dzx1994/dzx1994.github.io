@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-02-23T10:39:54.524Z</updated>
+  <updated>2017-02-21T09:05:19.974Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,20 +14,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>Redis in Android </title>
-    <link href="http://yoursite.com/2017/02/23/Redis-in-Android/"/>
-    <id>http://yoursite.com/2017/02/23/Redis-in-Android/</id>
-    <published>2017-02-23T10:39:54.000Z</published>
-    <updated>2017-02-23T10:39:54.524Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-    
-  </entry>
   
   <entry>
     <title>Android中优雅地使用反射</title>
