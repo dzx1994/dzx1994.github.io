@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-02-24T09:26:26.793Z</updated>
+  <updated>2017-02-27T10:52:41.025Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2017/02/23/Redis-in-Android/"/>
     <id>http://yoursite.com/2017/02/23/Redis-in-Android/</id>
     <published>2017-02-23T10:39:54.000Z</published>
-    <updated>2017-02-24T09:26:26.793Z</updated>
+    <updated>2017-02-27T10:52:41.025Z</updated>
     
     <content type="html"><![CDATA[<p><strong>Reids简介：</strong></p>
 <p>Redis 是完全开源免费的，遵守BSD协议，是一个高性能的key-value数据库。<br>Redis 与其他 key - value 缓存产品有以下三个特点：</p>
@@ -44,6 +44,8 @@
 <blockquote>
 <p><strong>关于更多有关redis的信息以及其操作移步<a href="https://redis.io/" title="https://redis.io/" target="_blank" rel="external">https://redis.io/</a>（要慢慢学会看英文文档）</strong></p>
 </blockquote>
+<p><strong>Redis在Android中的应用</strong></p>
+<p>网上关于Reids在Android中的应用的介绍几乎没有（Reids 后端开发中应用比较广泛），但不排除小伙伴们会使用reids进行存储（大部分是公司内部应用），接下来就来看看在Android中怎么去使用Redis。</p>
 ]]></content>
     
     <summary type="html">
