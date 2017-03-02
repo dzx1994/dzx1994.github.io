@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-02-27T10:52:41.025Z</updated>
+  <updated>2017-03-02T11:15:40.716Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Redis如何嵌入到Android中</title>
+    <title>Redis数据库如何嵌入到Android中</title>
     <link href="http://yoursite.com/2017/02/23/Redis-in-Android/"/>
     <id>http://yoursite.com/2017/02/23/Redis-in-Android/</id>
     <published>2017-02-23T10:39:54.000Z</published>
-    <updated>2017-02-27T10:52:41.025Z</updated>
+    <updated>2017-03-02T11:15:40.716Z</updated>
     
     <content type="html"><![CDATA[<p><strong>Reids简介：</strong></p>
 <p>Redis 是完全开源免费的，遵守BSD协议，是一个高性能的key-value数据库。<br>Redis 与其他 key - value 缓存产品有以下三个特点：</p>
@@ -46,6 +46,82 @@
 </blockquote>
 <p><strong>Redis在Android中的应用</strong></p>
 <p>网上关于Reids在Android中的应用的介绍几乎没有（Reids 后端开发中应用比较广泛），但不排除小伙伴们会使用reids进行存储（大部分是公司内部应用），接下来就来看看在Android中怎么去使用Redis。</p>
+<blockquote>
+<p><strong>先来看看Redis的服务端和客户端是怎么交互的</strong></p>
+</blockquote>
+<p>  Redis服务器是典型的一对多服务器程序，通过使用由IO多路复用技术实现的文件事件处理器，Redis服务器使用单线程单进程的方式来处理命令请求，并与多个客户端进行网络通信。</p>
+<p>  Redis客户端与服务器之间通过TCP协议进行通信。TCP协议是一种流式协议（TCP是基于Socket通信），数据以字节流的形式进行传递，没有固有的”报文”或”报文边界”的概念，如果需要设置边界，需要应用层自行处理。<br>  因此，Redis客户端与服务器之间的交互数据，都按照Redis自定义的统一请求协议的格式进行编码。使用这种协议，每条命令之间都有了“边界”。</p>
+<p>举个例子，如果客户端要向服务器发送以下命令请求：</p>
+<pre><code>`SET msg “helloworld”`
+</code></pre><p>   那么客户端实际发送的数据是：</p>
+<pre><code>*`3\r\n$3\r\nSET\r\n$3\r\nmsg\r\n$11\r\nhelloworld\r\n`
+</code></pre><p>   服务器收到这样的数据时，就可以通过解析”*3”得到该命令有3个参数，第一个参数长度为3，值为”SET”，也就是要执行的命令；第二个参数长度为3，值为”msg”；第三个参数长度为11，值为”hello world”。<br>   这样就得到了一条完整的命令，解析并处理该命令后，接着解析下一条命令。</p>
+<blockquote>
+<p><strong>接下来来踩坑</strong></p>
+</blockquote>
+<p>   Reids的API中有Java语言的主要有Jedis和Redisson，我先用Redisson撸了一遍，尴尬的是连编译都通不过，可是Redisson官网上清清楚楚写着支持Android</p>
+<p>   <img src="http://i.imgur.com/EUSokd7.png" alt=""></p>
+<p>马上上gayhub上和作者交流了一番，原来Redisson只是理论上支持Android，作者没有真实测试过，由于redisson关联的第三方包太多了，耦合性太高了，带来了很多未知的坑，作者建议我用Jedis，感兴趣的可以去踩踩坑。</p>
+<blockquote>
+<p><strong>使用Jedis</strong></p>
+</blockquote>
+<p>Jedis就有好多了，一次编译通过运行：</p>
+<pre><code>Jedis mJedis = new Jedis(HOST, PORT);
+mJedis.auth(PASSWORD);
+</code></pre><p>两行代码拿到Jedis，接下来就可以随意操作数据库了。但没过两分钟Jedis就报<code>JedisConnectionException： Read timed out</code>，WTF，上Gayhub一看，原来Jedis维护了一个JedisPool，能比较好的解决这个问题，马上撸：</p>
+<pre><code>public class RedisAPI {
+
+private static JedisPool pool = null;
+
+public static JedisPool getPool() {
+    if (pool == null) {
+        JedisPoolConfig config = new JedisPoolConfig();
+        // 控制一个pool可分配多少个jedis实例，通过pool.getResource()来获取；
+        // 如果赋值为-1，则表示不限制；如果pool已经分配了maxActive个jedis实例，则此时pool的状态为exhausted(耗尽)。
+        config.setMaxActive(500);
+        // 控制一个pool最多有多少个状态为idle(空闲的)的jedis实例。
+        config.setMaxIdle(5);
+        // 表示当borrow(引入)一个jedis实例时，最大的等待时间，如果超过等待时间，则直接抛出JedisConnectionException；
+        config.setMaxWait(1000 * 100);
+        // 在borrow一个jedis实例时，是否提前进行validate操作；如果为true，则得到的jedis实例均是可用的；
+        config.setTestOnBorrow(true);
+        pool = new JedisPool(config, HOST, POST);
+    }
+    return pool;
+}
+
+// 返还到连接池
+
+public static void returnResource(JedisPool pool, Jedis redis) {
+    if (redis != null) {
+        pool.returnResource(redis);
+    }
+}
+
+// 获取数据
+
+public static String get(String key) {
+    String value = null;
+
+    JedisPool pool = null;
+    Jedis jedis = null;
+    try {
+        pool = getPool();
+        jedis = pool.getResource();
+        value = jedis.get(key);
+    } catch (Exception e) {
+        // 释放redis对象
+        pool.returnBrokenResource(jedis);
+        e.printStackTrace();
+    } finally {
+        // 返还到连接池
+        returnResource(pool, jedis);
+    }
+
+    return value;
+  }
+}
+</code></pre><p>这样就应该没事了吧，可是，编译通过了，运行就崩了，</p>
 ]]></content>
     
     <summary type="html">
