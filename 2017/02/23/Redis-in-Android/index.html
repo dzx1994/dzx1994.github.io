@@ -103,7 +103,7 @@ Redi">
 <meta property="og:image" content="http://i.imgur.com/EUSokd7.png">
 <meta property="og:image" content="http://i.imgur.com/4XxPZWH.png">
 <meta property="og:image" content="http://i.imgur.com/dOUqOLG.jpg">
-<meta property="og:updated_time" content="2017-03-02T11:42:39.765Z">
+<meta property="og:updated_time" content="2017-03-02T11:52:57.379Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis数据库如何嵌入到Android中">
 <meta name="twitter:description" content="Reids简介：
@@ -496,7 +496,8 @@ return client.getIntegerReply();
 </code></pre><p>client是<code>redis.clients.jedis.Client.java</code>的实例，继承关系如下：</p>
 <pre><code>public class Client extends BinaryClient implements Commands；
 public class BinaryClient extends Connection；
-</code></pre><p>Connection包装了对Redis server的socket操作，命令写操作通过<code>socket.getOutputStream()</code>输出流将命令信息发送到redis server，当写完命令后要通过<code>socket.getInputStream()</code>的到的输入流将<br>命令执行结果返回，这中间必然会有一个命令执行到结果返回的延时时间，这就是一个Jedis调用redis命令操作所用的时间。<br>需要说明的是，Redis server是单线程执行所有连接发送过来的命令的，也就是说不管并发中有多少个client在发送命令，redis-server端是单线程处理的，并按照默认的FIFO方式处理请求，<br>这个可在redis.conf配置文件中配置。关于redis server的详细运行机制参见：<a href="http://redis.io/documentation" title="http://redis.io/documentation" target="_blank" rel="external">http://redis.io/documentation</a><br>所以<code>client.sadd(key, members)</code>;调用完后只是将命令信息发送到了redis server端，具体有没有执行要看redis server的负载情况。然后，通过c<code>lient.getIntegerReply()</code>;等待（time out)返回结果。<br>Connection初始化socket时有多种选择，其中设置socket time out 的方法如下：</p>
+</code></pre><p>Connection包装了对Redis server的socket操作，命令写操作通过<code>socket.getOutputStream()</code>输出流将命令信息发送到redis server，当写完命令后要通过<code>socket.getInputStream()</code>的到的输入流将<br>命令执行结果返回，这中间必然会有一个命令执行到结果返回的延时时间，这就是一个Jedis调用redis命令操作所用的时间。需要说明的是，Redis server是单线程执行所有连接发送过来的命令的，也就是说不管并发中有多少个client在发送命令，redis-server端是单线程处理的，并按照默认的FIFO方式处理请求，这个可在redis.conf配置文件中配置。关于redis server的详细运行机制参见：<a href="http://redis.io/documentation" title="http://redis.io/documentation" target="_blank" rel="external">http://redis.io/documentation</a>所以<code>client.sadd(key, members)</code>;调用完后只是将命令信息发送到了redis server端，具体有没有执行要看redis server的负载情况。然后，通过c<code>lient.getIntegerReply()</code>;等待（time out)返回结果。</p>
+<p>Connection初始化socket时有多种选择，其中设置socket time out 的方法如下：</p>
 <pre><code>  public void rollbackTimeout() {
       try {
 
