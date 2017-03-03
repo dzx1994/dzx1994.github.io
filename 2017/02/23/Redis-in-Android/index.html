@@ -103,7 +103,7 @@ Redi">
 <meta property="og:image" content="http://i.imgur.com/EUSokd7.png">
 <meta property="og:image" content="http://i.imgur.com/4XxPZWH.png">
 <meta property="og:image" content="http://i.imgur.com/dOUqOLG.jpg">
-<meta property="og:updated_time" content="2017-03-03T01:51:51.825Z">
+<meta property="og:updated_time" content="2017-03-03T02:03:38.935Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis数据库如何嵌入到Android中">
 <meta name="twitter:description" content="Reids简介：
@@ -496,8 +496,8 @@ return client.getIntegerReply();
 </code></pre><p>client是<code>redis.clients.jedis.Client.java</code>的实例，继承关系如下：</p>
 <pre><code>public class Client extends BinaryClient implements Commands；
 public class BinaryClient extends Connection；
-</code></pre><p>Connection包装了对Redis server的socket操作，命令写操作通过<code>socket.getOutputStream()</code>输出流将命令信息发送到redis server，当写完命令后要通过<code>socket.getInputStream()</code>的到的输入流将<br>命令执行结果返回，这中间必然会有一个命令执行到结果返回的延时时间，这就是一个Jedis调用redis命令操作所用的时间。需要说明的是，Redis server是单线程执行所有连接发送过来的命令的，也就是说不管并发中有多少个client在发送命令，redis-server端是单线程处理的，并按照默认的FIFO方式处理请求，这个可在redis.conf配置文件中配置。关于redis server的详细运行机制参见：<a href="http://redis.io/documentation" title="http://redis.io/documentation" target="_blank" rel="external">http://redis.io/documentation</a>所以<code>client.sadd(key, members)</code>;调用完后只是将命令信息发送到了redis server端，具体有没有执行要看redis server的负载情况。然后，通过c<code>lient.getIntegerReply()</code>;等待（time out)返回结果。</p>
-<p>Connection初始化socket时有多种选择，其中设置socket time out 的方法如下：</p>
+</code></pre><p>Connection包装了对Redis server的Socket操作，命令写操作通过<code>socket.getOutputStream()</code>输出流将命令信息发送到Redis server，当写完命令后要通过<code>socket.getInputStream()</code>的到的输入流将<br>命令执行结果返回，这中间必然会有一个命令执行到结果返回的延时时间，这就是一个Jedis调用Redis命令操作所用的时间。需要说明的是，Redis server是单线程执行所有连接发送过来的命令的，也就是说不管并发中有多少个client在发送命令，Redis-server端是单线程处理的，并按照默认的FIFO方式处理请求，这个可在redis.conf配置文件中配置。关于Redis server的详细运行机制参见：<a href="http://redis.io/documentation" title="http://redis.io/documentation" target="_blank" rel="external">http://redis.io/documentation</a>所以<code>client.sadd(key, members)</code>;调用完后只是将命令信息发送到了Redis server端，具体有没有执行要看Redis server的负载情况。然后，通过<code>client.getIntegerReply()</code>;等待（time out)返回结果。</p>
+<p>Connection初始化Socket时有多种选择，其中设置socket time out 的方法如下：</p>
 <pre><code>  public void rollbackTimeout() {
       try {
 
@@ -509,7 +509,7 @@ public class BinaryClient extends Connection；
 throw new JedisException(ex);
       }
   }
-</code></pre><p>由<code>redis.clients.jedis.Protocol.DEFAULT_TIMEOUT = 2000</code> 我们知道默认的超时时间是2秒，这个时间相对于redis操作内存毫秒级的速度来说已经很长，那我们为什么还会遇到<br><code>java.net.SocketTimeoutException: Read timed out</code>异常呢？redis操作内存虽然平均毫秒级的，但当数据量很大时未必都如此快速。在我的开发过程中就遇到过一个集合到了千万级数据量，一次操作超时时间在秒级是很正常的，而且机器性能很好的情况下已经如此，更何况我们本机开发的机器相对于生产服务器来说速度会更慢了。所以在初始化JedisPool时应该根据实际情况通合理设置连接参数，通过Jedis构造方法，合理设置socket读取输入InputStream的超时时间：</p>
+</code></pre><p>由<code>redis.clients.jedis.Protocol.DEFAULT_TIMEOUT = 2000</code> 我们知道默认的超时时间是2秒，这个时间相对于redis操作内存毫秒级的速度来说已经很长，那我们为什么还会遇到<br><code>java.net.SocketTimeoutException: Read timed out</code>异常呢？Redis操作内存虽然平均毫秒级的，但当数据量很大时未必都如此快速。在我的开发过程中就遇到过一个集合到了千万级数据量，一次操作超时时间在秒级是很正常的，而且机器性能很好的情况下已经如此，更何况我们本机开发的机器相对于生产服务器来说速度会更慢了。所以在初始化JedisPool时应该根据实际情况通合理设置连接参数，通过Jedis构造方法，合理设置Socket读取输入InputStream的超时时间：</p>
 <pre><code>Jedis mJedis = new Jedis(HOST, PORT, TIMEOUT);
 </code></pre><p>注意第三个参数time out，设置成我们能容忍的超时时间，单位是毫秒。但不知道为什么既然单位是毫秒，为什么参数类型是int而不是long。</p>
 <p>设置第三个参数后，我在四千万数据量集合上操作最多一次大概超时5秒，问题基本解决。</p>
