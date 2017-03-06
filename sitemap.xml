@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2017/03/06/How-to-systematically-remember-ADB-commands/</loc>
+    
+    <lastmod>2017-03-06T09:26:30.391Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2017/02/23/Redis-in-Android/</loc>
     
     <lastmod>2017-03-03T02:03:38.935Z</lastmod>
