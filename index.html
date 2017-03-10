@@ -397,6 +397,17 @@
 </ul>
 <p><img src="http://i.imgur.com/sPbcagX.png" alt=""></p>
 <p><strong>ADB 基本命令详解</strong></p>
+<blockquote>
+<p><strong>ADB 一些常用的基本命令就不详细例举了，相信大家也都铭记于心，网上一搜也一大把，我就来说说经常被开发者们忽略的：</strong></p>
+</blockquote>
+<pre><code>adb shutdown     关闭设备  
+adb root         获取root权限 （前提是手机已经root过）
+adb remount      重新挂载系统分区，使系统分区重新可写（前提是 adb root 成功，要想操作system必须执行这一步）
+adb logcat -v/d/i/w/e &lt;fomat&gt; &lt;file path&gt;    ps: v/d/i/w/e 分别为Verbose/Debug/Info/Warning/Error； fomat输出格式，主要使用的格式为time输出。 例如：adb logcat -v time C:\Users\Sean\log.txt
+adb reboot bootloader 重启到fastboot模式
+adb reboot recovery   重启到recovery模式
+adb sideload          使用更新包更新系统
+</code></pre><p><strong>ADB Shell 命令详解</strong></p>
 
           
         

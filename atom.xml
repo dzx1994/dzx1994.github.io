@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-03-07T03:32:57.590Z</updated>
+  <updated>2017-03-10T11:11:19.200Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2017/03/06/How-to-systematically-remember-ADB-commands/"/>
     <id>http://yoursite.com/2017/03/06/How-to-systematically-remember-ADB-commands/</id>
     <published>2017-03-06T09:25:08.000Z</published>
-    <updated>2017-03-07T03:32:57.590Z</updated>
+    <updated>2017-03-10T11:11:19.200Z</updated>
     
     <content type="html"><![CDATA[<p><strong>前言</strong></p>
 <p>说到 ADB 大家应该都不陌生，即 Android Debug Bridge，Android调试桥，身为 Android 开发的我们，熟练使用 ADB 命令将会大大提升我们的开发效率，但是 ADB 的命令有很多又很杂感觉有点杂乱无章，从小学起老师就叮嘱我们要有方法的去学习，今天就来总结下我是怎么系统地去记 ADB 命令。</p>
@@ -45,6 +45,17 @@
 </ul>
 <p><img src="http://i.imgur.com/sPbcagX.png" alt=""></p>
 <p><strong>ADB 基本命令详解</strong></p>
+<blockquote>
+<p><strong>ADB 一些常用的基本命令就不详细例举了，相信大家也都铭记于心，网上一搜也一大把，我就来说说经常被开发者们忽略的：</strong></p>
+</blockquote>
+<pre><code>adb shutdown     关闭设备  
+adb root         获取root权限 （前提是手机已经root过）
+adb remount      重新挂载系统分区，使系统分区重新可写（前提是 adb root 成功，要想操作system必须执行这一步）
+adb logcat -v/d/i/w/e &lt;fomat&gt; &lt;file path&gt;    ps: v/d/i/w/e 分别为Verbose/Debug/Info/Warning/Error； fomat输出格式，主要使用的格式为time输出。 例如：adb logcat -v time C:\Users\Sean\log.txt
+adb reboot bootloader 重启到fastboot模式
+adb reboot recovery   重启到recovery模式
+adb sideload          使用更新包更新系统
+</code></pre><p><strong>ADB Shell 命令详解</strong></p>
 ]]></content>
     
     <summary type="html">
