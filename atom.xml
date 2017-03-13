@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-03-13T10:50:17.904Z</updated>
+  <updated>2017-03-13T10:51:53.100Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2017/03/06/How-to-systematically-remember-ADB-commands/"/>
     <id>http://yoursite.com/2017/03/06/How-to-systematically-remember-ADB-commands/</id>
     <published>2017-03-06T09:25:08.000Z</published>
-    <updated>2017-03-13T10:50:17.904Z</updated>
+    <updated>2017-03-13T10:51:53.100Z</updated>
     
     <content type="html"><![CDATA[<p><strong>前言</strong></p>
 <p>说到 ADB 大家应该都不陌生，即 Android Debug Bridge，Android调试桥，身为 Android 开发的我们，熟练使用 ADB 命令将会大大提升我们的开发效率，但是 ADB 的命令有很多又很杂感觉有点杂乱无章，从小学起老师就叮嘱我们要有方法的去学习，今天就来总结下我是怎么系统地去记 ADB 命令。</p>
@@ -56,7 +56,7 @@ adb reboot bootloader 重启到fastboot模式
 adb reboot recovery   重启到recovery模式
 adb sideload          使用更新包更新系统
 </code></pre><p><strong>ADB Shell 命令详解</strong></p>
-<p>我们都是知道Android是基于Linux内核，ADB Shell 其实就是进入了Linux环境，所以在ADB Shell 命令下能够运行一些常见的Linux命令，</p>
+<p>我们都是知道Android是基于Linux内核，ADB Shell 其实就是进入了Linux环境，所以在ADB Shell 命令下能够运行一些常见的Linux命令，例如：ls cat date</p>
 ]]></content>
     
     <summary type="html">
