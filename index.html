@@ -408,7 +408,42 @@ adb reboot bootloader 重启到fastboot模式
 adb reboot recovery   重启到recovery模式
 adb sideload          使用更新包更新系统
 </code></pre><p><strong>ADB Shell 命令详解</strong></p>
-<p>我们都是知道Android是基于Linux内核，ADB Shell 其实就是进入了Linux环境，所以在ADB Shell 命令下能够运行一些常见的Linux命令，例如：ls cat date</p>
+<p>我们都是知道Android是基于Linux内核，ADB Shell 其实就是进入了Linux环境，所以在ADB Shell 命令下能够运行一些常见的Linux命令，例如：ls cat date cp rm pwd mount chmod …. 想必这些命令大家都已经熟能生巧了。</p>
+<blockquote>
+<p><strong>pm（package manager）</strong></p>
+</blockquote>
+<p>  如其名字一样，包管理器，用此命令可以查询所有有关包的信息<br><img src="http://i.imgur.com/HsW9Dto.png" alt=""></p>
+<blockquote>
+<p><strong>am（Activity）</strong></p>
+</blockquote>
+<p> Activity管理器，你能使用am去模拟各种系统的行为，例如去启动一个activity，强制停止进程，发送广播进程，修改设备屏幕属性等等。</p>
+<p><img src="http://i.imgur.com/0GZNXQ5.png" alt=""></p>
+<blockquote>
+<p><strong>ps 这是一个linux命令（process state）</strong></p>
+</blockquote>
+<p>linux一个查看进程的命令，看以查看当前进程的状态，经常使用ps | grep + packagename 进行查看应用的进程状态。</p>
+<blockquote>
+<p><strong>top</strong></p>
+</blockquote>
+<p>top命令提供了实时的对系统处理器的状态监视.它将显示系统中CPU最“敏感”的任务列表.该命令可以按CPU使用.内存使用和执行时间对任务进行排序<br>详情可查看<a href="http://blog.csdn.net/liuhu767/article/details/53442807" title="http://blog.csdn.net/liuhu767/article/details/53442807" target="_blank" rel="external">http://blog.csdn.net/liuhu767/article/details/53442807</a>这篇博客。</p>
+<blockquote>
+<p><strong>input</strong></p>
+</blockquote>
+<p>模拟事件（按键/输入），例如 点击，滑动 输入文本等等</p>
+<blockquote>
+<p><strong>getprop/setprop</strong></p>
+</blockquote>
+<p>查看属性 </p>
+<p><img src="http://i.imgur.com/pE0zxDF.png" alt=""></p>
+<blockquote>
+<p><strong>dumpsys</strong></p>
+</blockquote>
+<p>dumpsys命令功能很强大，能dump系统服务的各种状态，非常有必要熟悉该命令的用法以及含义，其具体的用法<a href="http://gityuan.com/2016/05/14/dumpsys-command/" target="_blank" rel="external">http://gityuan.com/2016/05/14/dumpsys-command/</a>这篇博客介绍的很详细。</p>
+<p><strong>总结</strong><br> 其实 ADB 命令记住的技巧很简单，就是把它进行分类去进行记忆，然后理解每个类别的含义这样下次你想用ADB 命令感谢什么，你只要联想到相关类别就行了。</p>
+<blockquote>
+<p> 欢迎关注我的微信公众号 BugsDeveloper，第一时间获取文章更新以及更多原创干货分享！</p>
+<p>   <img src="http://i.imgur.com/dOUqOLG.jpg" alt=""></p>
+</blockquote>
 
           
         
