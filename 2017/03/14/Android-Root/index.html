@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="plan," />
+  <meta name="keywords" content="Root," />
 
 
 
@@ -84,26 +84,29 @@
 
 
 
-<meta name="description" content="前言
-2017年（开工）的第一篇博客，也是用Github Pages写的第一篇博客。也算是换种方式和风格来写博客，之前博客都是在CSDN写，风格就像记笔记一样，内容也是大杂烩，google一搜一大把。之前CSDN写的博客就让它自生自灭吧。
-回顾2016
-2016年7月正式踏入社会，带着对未来的憧憬南下深圳，第一份工作很顺利，但也很坑，一家上市公司的分公司，入职后发现居然类似于外包公司，做完一个项目">
+<meta name="description" content="###前言###
+在项目的过程中，有可能会要实现类似360优化大师、安卓优化大师的软件搬家、静默安装等需要root权限的功能，关于Android Root，之后会出详细文章进行介绍。但是如何让一个一直应用拥有Root权限呢？
+Android 应用请求Root权限
+`Process process = Runtime.getRuntime().exec(&amp;quot;su&amp;quot;);`
+一行代码就">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SeanDong's 2017">
-<meta property="og:url" content="http://yoursite.com/2017/02/06/SeanDong's 2017/index.html">
+<meta property="og:title" content="Android 如何保证应用一直拥有Root权限 ">
+<meta property="og:url" content="http://yoursite.com/2017/03/14/Android-Root/index.html">
 <meta property="og:site_name" content="BugsDeveloper">
-<meta property="og:description" content="前言
-2017年（开工）的第一篇博客，也是用Github Pages写的第一篇博客。也算是换种方式和风格来写博客，之前博客都是在CSDN写，风格就像记笔记一样，内容也是大杂烩，google一搜一大把。之前CSDN写的博客就让它自生自灭吧。
-回顾2016
-2016年7月正式踏入社会，带着对未来的憧憬南下深圳，第一份工作很顺利，但也很坑，一家上市公司的分公司，入职后发现居然类似于外包公司，做完一个项目">
+<meta property="og:description" content="###前言###
+在项目的过程中，有可能会要实现类似360优化大师、安卓优化大师的软件搬家、静默安装等需要root权限的功能，关于Android Root，之后会出详细文章进行介绍。但是如何让一个一直应用拥有Root权限呢？
+Android 应用请求Root权限
+`Process process = Runtime.getRuntime().exec(&amp;quot;su&amp;quot;);`
+一行代码就">
 <meta property="og:image" content="http://i.imgur.com/dOUqOLG.jpg">
-<meta property="og:updated_time" content="2017-02-15T10:28:27.150Z">
+<meta property="og:updated_time" content="2017-03-14T11:21:32.727Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SeanDong's 2017">
-<meta name="twitter:description" content="前言
-2017年（开工）的第一篇博客，也是用Github Pages写的第一篇博客。也算是换种方式和风格来写博客，之前博客都是在CSDN写，风格就像记笔记一样，内容也是大杂烩，google一搜一大把。之前CSDN写的博客就让它自生自灭吧。
-回顾2016
-2016年7月正式踏入社会，带着对未来的憧憬南下深圳，第一份工作很顺利，但也很坑，一家上市公司的分公司，入职后发现居然类似于外包公司，做完一个项目">
+<meta name="twitter:title" content="Android 如何保证应用一直拥有Root权限 ">
+<meta name="twitter:description" content="###前言###
+在项目的过程中，有可能会要实现类似360优化大师、安卓优化大师的软件搬家、静默安装等需要root权限的功能，关于Android Root，之后会出详细文章进行介绍。但是如何让一个一直应用拥有Root权限呢？
+Android 应用请求Root权限
+`Process process = Runtime.getRuntime().exec(&amp;quot;su&amp;quot;);`
+一行代码就">
 <meta name="twitter:image" content="http://i.imgur.com/dOUqOLG.jpg">
 
 
@@ -132,13 +135,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/02/06/SeanDong's 2017/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/03/14/Android-Root/"/>
 
 
 
 
 
-  <title> SeanDong's 2017 | BugsDeveloper </title>
+  <title> Android 如何保证应用一直拥有Root权限  | BugsDeveloper </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -271,7 +274,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/06/SeanDong's 2017/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/14/Android-Root/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Sean Dong">
@@ -295,7 +298,7 @@
             
             
               
-                SeanDong's 2017
+                Android 如何保证应用一直拥有Root权限 
               
             
           </h1>
@@ -310,8 +313,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-06T16:13:30+08:00">
-                2017-02-06
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-14T18:57:05+08:00">
+                2017-03-14
               </time>
             
 
@@ -333,8 +336,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/life/" itemprop="url" rel="index">
-                    <span itemprop="name">life</span>
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
                   </a>
                 </span>
 
@@ -352,7 +355,7 @@
 
           
           
-             <span id="/2017/02/06/SeanDong's 2017/" class="leancloud_visitors" data-flag-title="SeanDong's 2017">
+             <span id="/2017/03/14/Android-Root/" class="leancloud_visitors" data-flag-title="Android 如何保证应用一直拥有Root权限 ">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -379,37 +382,43 @@
       
 
       
-        <p><strong>前言</strong></p>
-<p>2017年（开工）的第一篇博客，也是用Github Pages写的第一篇博客。也算是换种方式和风格来写博客，之前博客都是在CSDN写，风格就像记笔记一样，内容也是大杂烩，google一搜一大把。之前CSDN写的博客就让它自生自灭吧。</p>
-<p><strong>回顾2016</strong></p>
-<p>2016年7月正式踏入社会，带着对未来的憧憬南下深圳，第一份工作很顺利，但也很坑，一家上市公司的分公司，入职后发现居然类似于外包公司，做完一个项目就say goodbye了，第二份工作找的比较认真，最后一家做大数据的初创公司吸引了我，我的职责是开发一款强大的数据采集App兼Android逆向开发和App破解。</p>
-<blockquote>
-<p>2016的遗憾：</p>
-</blockquote>
-<p>错过了校招，但是金子总会发光；没有处理好生活和工作的关系，2017加以改正；没有一场说走就走的旅行。</p>
-<p><strong>展望2017</strong></p>
-<blockquote>
-<p>博客：</p>
-</blockquote>
-<p>认真对待博客，运营一个微信公众号。微信文章，个人博客同步更新，每周一更，文章争取全部原创，文章内容主要为以下几点：</p>
-<ul>
-<li>技术要点为google搜索不到或者不全</li>
-<li>主要为Android相关的技术文章</li>
-<li>自己开发中的一些经验的分享</li>
-<li>一些好的资源的推荐</li>
-</ul>
-<blockquote>
-<p>工作：</p>
-</blockquote>
-<p>全身心投入工作中，学会一日三省；写出star 200+的开源项目；撸定python；多总结，交流。</p>
-<blockquote>
-<p>生活：</p>
-</blockquote>
-<p>一周不少于三次健身；至少一场旅游；学会处理生活琐事。</p>
-<blockquote>
-<p>最最最重要的：</p>
-</blockquote>
-<p>认认真真经营好和我女朋友的感情。              </p>
+        <p>###前言###</p>
+<p>在项目的过程中，有可能会要实现类似360优化大师、安卓优化大师的软件搬家、静默安装等需要root权限的功能，关于Android Root，之后会出详细文章进行介绍。但是如何让一个一直应用拥有Root权限呢？</p>
+<p><strong>Android 应用请求Root权限</strong></p>
+<pre><code>`Process process = Runtime.getRuntime().exec(&quot;su&quot;);`
+</code></pre><p>一行代码就够了，但是这样做就可以了吗…..肯定没这么简单啦！当执行需要系统权限的操作时，系统还是回去检查应用程序是否拥有该权限。<br>所以我们要想办法绕过过系统检查权限这道关卡！但是市面上对大多数应用都没有对这进行处理，就连360都没有，上stackoverflow搜了一圈空手而归，突然发现按键精灵APK能一直拥有Root权限，他是通过执行Shell 命令输入 echo “rootOK”，进行Hook Root权限。我们模拟用 ADB Shell进行命令，控制板返回 OK，之后Root权限一直存在。接下来讲讲如何代码进行 输入ADB Shell 命令。</p>
+<p><strong>代码控制ABD Shell 命令</strong></p>
+<pre><code>/**
+ * request root permission
+ */
+private void requestRoot() {
+    try {
+        this.mProcess = Runtime.getRuntime().exec(&quot;su \n&quot;);
+        this.mOutput = this.mProcess.getOutputStream();
+        this.mOutput.write(&quot;echo \&quot;rootOK\&quot;\n&quot;.getBytes());
+        this.mOutput.flush();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
+</code></pre><p>显示请求并Hook Root权限。</p>
+<pre><code>/**
+ * execute shell cmd
+ *
+ * @param command shell command
+ */
+public void execute(String command) {
+    try {
+        this.mOutput.write(command.getBytes());
+        this.mOutput.flush();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
+</code></pre><p>执行ADB Shell 命令其实就是获取Root之后的进程输出流，然后通过输出流传递 ADB Shell 命令。</p>
+<p><strong>Hook Root 权限关键代码</strong></p>
+<pre><code>this.mOutput.write(&quot;echo \&quot;rootOK\&quot;\n&quot;.getBytes());
+</code></pre><p>我在Gayhub上传了Root获取和执行Shell命令的工具类，欢迎下载<a href="https://github.com/dzx1994/RootShell" target="_blank" rel="external">https://github.com/dzx1994/RootShell</a></p>
 <blockquote>
 <p> 欢迎关注我的微信公众号 BugsDeveloper，第一时间获取文章更新以及更多原创干货分享！</p>
 <p>   <img src="http://i.imgur.com/dOUqOLG.jpg" alt=""></p>
@@ -437,7 +446,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/plan/" rel="tag"># plan</a>
+            <a href="/tags/Root/" rel="tag"># Root</a>
           
         </div>
       
@@ -446,15 +455,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/03/06/How-to-systematically-remember-ADB-commands/" rel="next" title="如何系统地记住 ADB 命令">
+                <i class="fa fa-chevron-left"></i> 如何系统地记住 ADB 命令
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/02/17/Reflection-in-Android/" rel="prev" title="Android中优雅地使用反射">
-                Android中优雅地使用反射 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
