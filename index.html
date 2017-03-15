@@ -374,7 +374,7 @@
       
         
           
-            <p>最近工作项目中碰到需要在 Android 客户端中搭建一个服务器的需求，一般来说都是 Android 客户端请求服务器数据进行解析然后渲。这种需求也是第一次遇到，首先想到的就是用Socket进行连接。</p>
+            <p>最近工作项目中碰到需要在 Android 客户端中搭建一个服务器的需求，一般来说都是 Android 客户端请求服务器数据进行解析然后渲。这种需求也是第一次遇到，首先想到的就是用 Socket 进行连接。</p>
 
           
         
@@ -526,12 +526,12 @@
       
         
           
-            <p>###前言###</p>
-<p>在项目的过程中，有可能会要实现类似360优化大师、安卓优化大师的软件搬家、静默安装等需要root权限的功能，关于Android Root，之后会出详细文章进行介绍。但是如何让一个一直应用拥有Root权限呢？</p>
-<p><strong>Android 应用请求Root权限</strong></p>
+            <p><strong>前言</strong></p>
+<p>在项目的过程中，有可能会要实现类似360优化大师、安卓优化大师的软件搬家、静默安装等需要 root 权限的功能，关于 Android Root，之后会出详细文章进行介绍。但是如何让一个一直应用拥有 Root 权限呢？</p>
+<p><strong>Android 应用请求 Root 权限</strong></p>
 <pre><code>`Process process = Runtime.getRuntime().exec(&quot;su&quot;);`
-</code></pre><p>一行代码就够了，但是这样做就可以了吗…..肯定没这么简单啦！当执行需要系统权限的操作时，系统还是回去检查应用程序是否拥有该权限。<br>所以我们要想办法绕过过系统检查权限这道关卡！但是市面上对大多数应用都没有对这进行处理，就连360都没有，上stackoverflow搜了一圈空手而归，突然发现按键精灵APK能一直拥有Root权限，他是通过执行Shell 命令输入 echo “rootOK”，进行Hook Root权限。我们模拟用 ADB Shell进行命令，控制板返回 OK，之后Root权限一直存在。接下来讲讲如何代码进行 输入ADB Shell 命令。</p>
-<p><strong>代码控制ABD Shell 命令</strong></p>
+</code></pre><p>一行代码就够了，但是这样做就可以了吗…..肯定没这么简单啦！当执行需要系统权限的操作时，系统还是回去检查应用程序是否拥有该权限。<br>所以我们要想办法绕过过系统检查权限这道关卡！但是市面上对大多数应用都没有对这进行处理，就连360都没有，上 stackoverflow 搜了一圈空手而归，突然发现按键精灵 APK 能一直拥有 Root 权限，他是通过执行 Shell 命令输入 echo “rootOK”，进行 Hook Root权限。我们模拟用 ADB Shell进行命令，控制板返回 OK，之后 Root 权限一直存在。接下来讲讲如何代码进行 输入 ADB Shell 命令。</p>
+<p><strong>代码控制 ABD Shell 命令</strong></p>
 <pre><code>/**
  * request root permission
  */
@@ -545,7 +545,7 @@ private void requestRoot() {
         e.printStackTrace();
     }
 }
-</code></pre><p>显示请求并Hook Root权限。</p>
+</code></pre><p>显示请求并 Hook Root权限。</p>
 <pre><code>/**
  * execute shell cmd
  *
@@ -559,10 +559,10 @@ public void execute(String command) {
         e.printStackTrace();
     }
 }
-</code></pre><p>执行ADB Shell 命令其实就是获取Root之后的进程输出流，然后通过输出流传递 ADB Shell 命令。</p>
+</code></pre><p>执行 ADB Shell 命令其实就是获取Root之后的进程输出流，然后通过输出流传递 ADB Shell 命令。</p>
 <p><strong>Hook Root 权限关键代码</strong></p>
 <pre><code>this.mOutput.write(&quot;echo \&quot;rootOK\&quot;\n&quot;.getBytes());
-</code></pre><p>我在Gayhub上传了Root获取和执行Shell命令的工具类，欢迎下载<a href="https://github.com/dzx1994/RootShell" target="_blank" rel="external">https://github.com/dzx1994/RootShell</a></p>
+</code></pre><p>我在 Gayhub 上传了 Root 获取和执行 Shell 命令的工具类，欢迎下载<a href="https://github.com/dzx1994/RootShell" target="_blank" rel="external">https://github.com/dzx1994/RootShell</a></p>
 <blockquote>
 <p> 欢迎关注我的微信公众号 BugsDeveloper，第一时间获取文章更新以及更多原创干货分享！</p>
 <p>   <img src="http://i.imgur.com/dOUqOLG.jpg" alt=""></p>
