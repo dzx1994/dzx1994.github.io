@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Root," />
+  <meta name="keywords" content="NanoHTTPD," />
 
 
 
@@ -84,30 +84,16 @@
 
 
 
-<meta name="description" content="###前言###
-在项目的过程中，有可能会要实现类似360优化大师、安卓优化大师的软件搬家、静默安装等需要root权限的功能，关于Android Root，之后会出详细文章进行介绍。但是如何让一个一直应用拥有Root权限呢？
-Android 应用请求Root权限
-`Process process = Runtime.getRuntime().exec(&amp;quot;su&amp;quot;);`
-一行代码就">
+<meta name="description" content="最近工作项目中碰到需要在 Android 客户端中搭建一个服务器的需求，一般来说都是 Android 客户端请求服务器数据进行解析然后渲。这种需求也是第一次遇到，首先想到的就是用Socket进行连接。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android 如何保证应用一直拥有Root权限 ">
-<meta property="og:url" content="http://yoursite.com/2017/03/14/Android-Root/index.html">
+<meta property="og:title" content="NanoHTTPD 简易 Http 服务器源码解读">
+<meta property="og:url" content="http://yoursite.com/2017/03/15/NanoHTTPD-Source-detailed/index.html">
 <meta property="og:site_name" content="BugsDeveloper">
-<meta property="og:description" content="###前言###
-在项目的过程中，有可能会要实现类似360优化大师、安卓优化大师的软件搬家、静默安装等需要root权限的功能，关于Android Root，之后会出详细文章进行介绍。但是如何让一个一直应用拥有Root权限呢？
-Android 应用请求Root权限
-`Process process = Runtime.getRuntime().exec(&amp;quot;su&amp;quot;);`
-一行代码就">
-<meta property="og:image" content="http://i.imgur.com/dOUqOLG.jpg">
-<meta property="og:updated_time" content="2017-03-14T11:21:32.727Z">
+<meta property="og:description" content="最近工作项目中碰到需要在 Android 客户端中搭建一个服务器的需求，一般来说都是 Android 客户端请求服务器数据进行解析然后渲。这种需求也是第一次遇到，首先想到的就是用Socket进行连接。">
+<meta property="og:updated_time" content="2017-03-15T10:43:02.837Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android 如何保证应用一直拥有Root权限 ">
-<meta name="twitter:description" content="###前言###
-在项目的过程中，有可能会要实现类似360优化大师、安卓优化大师的软件搬家、静默安装等需要root权限的功能，关于Android Root，之后会出详细文章进行介绍。但是如何让一个一直应用拥有Root权限呢？
-Android 应用请求Root权限
-`Process process = Runtime.getRuntime().exec(&amp;quot;su&amp;quot;);`
-一行代码就">
-<meta name="twitter:image" content="http://i.imgur.com/dOUqOLG.jpg">
+<meta name="twitter:title" content="NanoHTTPD 简易 Http 服务器源码解读">
+<meta name="twitter:description" content="最近工作项目中碰到需要在 Android 客户端中搭建一个服务器的需求，一般来说都是 Android 客户端请求服务器数据进行解析然后渲。这种需求也是第一次遇到，首先想到的就是用Socket进行连接。">
 
 
 
@@ -135,13 +121,13 @@ Android 应用请求Root权限
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/03/14/Android-Root/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/03/15/NanoHTTPD-Source-detailed/"/>
 
 
 
 
 
-  <title> Android 如何保证应用一直拥有Root权限  | BugsDeveloper </title>
+  <title> NanoHTTPD 简易 Http 服务器源码解读 | BugsDeveloper </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -274,7 +260,7 @@ Android 应用请求Root权限
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/14/Android-Root/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/15/NanoHTTPD-Source-detailed/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Sean Dong">
@@ -298,7 +284,7 @@ Android 应用请求Root权限
             
             
               
-                Android 如何保证应用一直拥有Root权限 
+                NanoHTTPD 简易 Http 服务器源码解读
               
             
           </h1>
@@ -313,8 +299,8 @@ Android 应用请求Root权限
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-14T18:57:05+08:00">
-                2017-03-14
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-15T18:35:36+08:00">
+                2017-03-15
               </time>
             
 
@@ -355,7 +341,7 @@ Android 应用请求Root权限
 
           
           
-             <span id="/2017/03/14/Android-Root/" class="leancloud_visitors" data-flag-title="Android 如何保证应用一直拥有Root权限 ">
+             <span id="/2017/03/15/NanoHTTPD-Source-detailed/" class="leancloud_visitors" data-flag-title="NanoHTTPD 简易 Http 服务器源码解读">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -382,47 +368,7 @@ Android 应用请求Root权限
       
 
       
-        <p>###前言###</p>
-<p>在项目的过程中，有可能会要实现类似360优化大师、安卓优化大师的软件搬家、静默安装等需要root权限的功能，关于Android Root，之后会出详细文章进行介绍。但是如何让一个一直应用拥有Root权限呢？</p>
-<p><strong>Android 应用请求Root权限</strong></p>
-<pre><code>`Process process = Runtime.getRuntime().exec(&quot;su&quot;);`
-</code></pre><p>一行代码就够了，但是这样做就可以了吗…..肯定没这么简单啦！当执行需要系统权限的操作时，系统还是回去检查应用程序是否拥有该权限。<br>所以我们要想办法绕过过系统检查权限这道关卡！但是市面上对大多数应用都没有对这进行处理，就连360都没有，上stackoverflow搜了一圈空手而归，突然发现按键精灵APK能一直拥有Root权限，他是通过执行Shell 命令输入 echo “rootOK”，进行Hook Root权限。我们模拟用 ADB Shell进行命令，控制板返回 OK，之后Root权限一直存在。接下来讲讲如何代码进行 输入ADB Shell 命令。</p>
-<p><strong>代码控制ABD Shell 命令</strong></p>
-<pre><code>/**
- * request root permission
- */
-private void requestRoot() {
-    try {
-        this.mProcess = Runtime.getRuntime().exec(&quot;su \n&quot;);
-        this.mOutput = this.mProcess.getOutputStream();
-        this.mOutput.write(&quot;echo \&quot;rootOK\&quot;\n&quot;.getBytes());
-        this.mOutput.flush();
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
-}
-</code></pre><p>显示请求并Hook Root权限。</p>
-<pre><code>/**
- * execute shell cmd
- *
- * @param command shell command
- */
-public void execute(String command) {
-    try {
-        this.mOutput.write(command.getBytes());
-        this.mOutput.flush();
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
-}
-</code></pre><p>执行ADB Shell 命令其实就是获取Root之后的进程输出流，然后通过输出流传递 ADB Shell 命令。</p>
-<p><strong>Hook Root 权限关键代码</strong></p>
-<pre><code>this.mOutput.write(&quot;echo \&quot;rootOK\&quot;\n&quot;.getBytes());
-</code></pre><p>我在Gayhub上传了Root获取和执行Shell命令的工具类，欢迎下载<a href="https://github.com/dzx1994/RootShell" target="_blank" rel="external">https://github.com/dzx1994/RootShell</a></p>
-<blockquote>
-<p> 欢迎关注我的微信公众号 BugsDeveloper，第一时间获取文章更新以及更多原创干货分享！</p>
-<p>   <img src="http://i.imgur.com/dOUqOLG.jpg" alt=""></p>
-</blockquote>
+        <p>最近工作项目中碰到需要在 Android 客户端中搭建一个服务器的需求，一般来说都是 Android 客户端请求服务器数据进行解析然后渲。这种需求也是第一次遇到，首先想到的就是用Socket进行连接。</p>
 
       
     </div>
@@ -446,7 +392,7 @@ public void execute(String command) {
       
         <div class="post-tags">
           
-            <a href="/tags/Root/" rel="tag"># Root</a>
+            <a href="/tags/NanoHTTPD/" rel="tag"># NanoHTTPD</a>
           
         </div>
       
@@ -455,8 +401,8 @@ public void execute(String command) {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/06/How-to-systematically-remember-ADB-commands/" rel="next" title="如何系统地记住 ADB 命令">
-                <i class="fa fa-chevron-left"></i> 如何系统地记住 ADB 命令
+              <a href="/2017/03/14/Android-Root/" rel="next" title="Android 如何保证应用一直拥有Root权限 ">
+                <i class="fa fa-chevron-left"></i> Android 如何保证应用一直拥有Root权限 
               </a>
             
           </div>
@@ -464,10 +410,6 @@ public void execute(String command) {
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/03/15/NanoHTTPD-Source-detailed/" rel="prev" title="NanoHTTPD 简易 Http 服务器源码解读">
-                NanoHTTPD 简易 Http 服务器源码解读 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>

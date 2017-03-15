@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-03-14T11:21:32.727Z</updated>
+  <updated>2017-03-15T10:43:02.837Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>NanoHTTPD 简易 Http 服务器源码解读</title>
+    <link href="http://yoursite.com/2017/03/15/NanoHTTPD-Source-detailed/"/>
+    <id>http://yoursite.com/2017/03/15/NanoHTTPD-Source-detailed/</id>
+    <published>2017-03-15T10:35:36.000Z</published>
+    <updated>2017-03-15T10:43:02.837Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近工作项目中碰到需要在 Android 客户端中搭建一个服务器的需求，一般来说都是 Android 客户端请求服务器数据进行解析然后渲。这种需求也是第一次遇到，首先想到的就是用Socket进行连接。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近工作项目中碰到需要在 Android 客户端中搭建一个服务器的需求，一般来说都是 Android 客户端请求服务器数据进行解析然后渲。这种需求也是第一次遇到，首先想到的就是用Socket进行连接。&lt;/p&gt;
+
+    
+    </summary>
+    
+      <category term="Android" scheme="http://yoursite.com/categories/Android/"/>
+    
+    
+      <category term="NanoHTTPD" scheme="http://yoursite.com/tags/NanoHTTPD/"/>
+    
+  </entry>
   
   <entry>
     <title>Android 如何保证应用一直拥有Root权限 </title>
