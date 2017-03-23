@@ -373,10 +373,16 @@
 
       
         
-          
-            <p>最近工作项目中碰到需要在 Android 客户端中搭建一个服务器的需求，一般来说都是 Android 客户端请求服务器数据进行解析然后渲染。这种需求也是第一次遇到，首先想到的就是用 Socket 进行连接。在手机端维护一个</p>
-
-          
+          <p>最近工作项目中碰到需要在 Android 客户端中搭建一个服务器的需求，一般来说都是 Android 客户端请求服务器数据进行解析然后渲染。这种需求也是第一次遇到。经查阅有一个简易的 HTTP 服务器 NanoHTTPD，只有一个类文件。就像去瞧瞧，结果发现这个类里面有20+个内部类和接口。看了源代码之后，对 HTTP 服务器的理解也更加深入了。<a href="https://github.com/NanoHttpd/nanohttpd">源代码</a></p>
+<h1 id="NanoHTTPD-服务器的请求流程图"><a href="#NanoHTTPD-服务器的请求流程图" class="headerlink" title="NanoHTTPD 服务器的请求流程图"></a>NanoHTTPD 服务器的请求流程图</h1><p><img src="http://i.imgur.com/xez0S2d.jpg" alt=""></p>
+<p><font color="red"> 图上3中不同颜色的箭头，分别代表三种线程。</font>&gt;<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/03/15/NanoHTTPD-Source-detailed/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
