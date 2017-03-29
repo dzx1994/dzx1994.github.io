@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-03-23T11:57:38.786Z</updated>
+  <updated>2017-03-29T04:06:07.317Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,24 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Android Native 层校验应用签名并破解</title>
+    <link href="http://yoursite.com/2017/03/29/Android-JNI-Check-signature/"/>
+    <id>http://yoursite.com/2017/03/29/Android-JNI-Check-signature/</id>
+    <published>2017-03-29T04:01:16.000Z</published>
+    <updated>2017-03-29T04:06:07.317Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="Android" scheme="http://yoursite.com/categories/Android/"/>
+    
+    
+      <category term="JNI" scheme="http://yoursite.com/tags/JNI/"/>
+    
+  </entry>
   
   <entry>
     <title>NanoHTTPD 简易 Http 服务器源码解读</title>
