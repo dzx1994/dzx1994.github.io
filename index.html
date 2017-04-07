@@ -374,7 +374,63 @@
       
         
           
-            
+            <p><strong>前言</strong></p>
+<p>为了防止应用被反编译，在java层做sign的校对是不可靠的，反编译通过搜索“signatures”关键字就能找到程序的校对代码，所以把sign的校验放在native层会比较可靠。</p>
+<p><strong>Java层获取Sign</strong></p>
+<pre><code>public static String getSignature(Context context)
+{
+    try {
+        /** 通过包管理器获得指定包名包含签名的包信息 **/
+        PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), PackageManager.GET_SIGNATURES);
+        /******* 通过返回的包信息获得签名数组 *******/
+        Signature[] signatures = packageInfo.signatures;
+        /******* 循环遍历签名数组拼接应用签名 *******/
+        return signatures[0].toCharsString();
+        /************** 得到应用签名 **************/
+    } catch (PackageManager.NameNotFoundException e) {
+        e.printStackTrace();
+    }
+    return null;
+}
+</code></pre><p><strong>Native层获取sign</strong></p>
+<p>这里Jni的开发就不介绍了，Native获取sign的逻辑主要就是通过反射执行java层获取Sign的代码。</p>
+<pre><code>const char *RELEASE_SIGN =&quot;308202......&quot;;
+
+    JNIEXPORT jstring JNICALL Java_com_bitbeyond_jnidemo_MainActivity_getStringFromNative(JNIEnv *env,jobject object,jobject context){
+//-----以下验证签名逻辑主要方法  今天所讲的主题主要代码
+jclass native_class = env-&gt;GetObjectClass(context);
+jmethodID pm_id = env-&gt;GetMethodID(native_class, &quot;getPackageManager&quot;,&quot;()Landroid/content/pm/PackageManager;&quot;);
+jobject pm_obj = env-&gt;CallObjectMethod(context, pm_id);
+jclass pm_clazz = env-&gt;GetObjectClass(pm_obj);
+// 得到 getPackageInfo 方法的 ID
+jmethodID package_info_id = env-&gt;GetMethodID(pm_clazz, &quot;getPackageInfo&quot;, &quot;(Ljava/lang/String;I)Landroid/content/pm/PackageInfo;&quot;);
+jclass native_classs = env-&gt;GetObjectClass(context);
+jmethodID mId = env-&gt;GetMethodID(native_classs, &quot;getPackageName&quot;,&quot;()Ljava/lang/String;&quot;);
+jstring pkg_str = static_cast&lt;jstring&gt;(env-&gt;CallObjectMethod(context, mId));
+// 获得应用包的信息
+jobject pi_obj = env-&gt;CallObjectMethod(pm_obj, package_info_id, pkg_str, 64);
+// 获得 PackageInfo 类
+jclass pi_clazz = env-&gt;GetObjectClass(pi_obj);
+// 获得签名数组属性的 ID
+jfieldID signatures_fieldId = env-&gt;GetFieldID(pi_clazz, &quot;signatures&quot;,&quot;[Landroid/content/pm/Signature;&quot;);
+jobject signatures_obj = env-&gt;GetObjectField(pi_obj, signatures_fieldId);
+jobjectArray signaturesArray = (jobjectArray) signatures_obj;
+jsize size = env-&gt;GetArrayLength(signaturesArray);
+jobject signature_obj = env-&gt;GetObjectArrayElement(signaturesArray, 0);
+jclass signature_clazz = env-&gt;GetObjectClass(signature_obj);
+jmethodID string_id = env-&gt;GetMethodID(signature_clazz, &quot;toCharsString&quot;,&quot;()Ljava/lang/String;&quot;);
+jstring str = static_cast&lt;jstring&gt;(env-&gt;CallObjectMethod(signature_obj, string_id));
+char *c_msg = (char *) env-&gt;GetStringUTFChars(str, 0);
+if (strcmp(c_msg, RELEASE_SIGN) == 0){
+    return env-&gt;NewStringUTF(c_msg);
+} else{
+    return env-&gt;NewStringUTF(&quot;退出应用&quot;);
+}
+</code></pre><p>}</p>
+<p>RELEASE_SIGN是在Java层获取得到的Sign，C_msg 就是Native层获取的Sign了，通过比较比较两个Sign做出不同的逻辑，这里如果比较不成功就返回“退出应用”字符串。</p>
+<p><strong>修改Native层逻辑</strong><br>其实在Native层做校验也不是很安全的，懂点ARM汇编的分分钟就破解了，接下来看看怎么修改Native层逻辑。</p>
+<p>这里用使用到一个强大的反编译软件IDA Pro，</p>
+
           
         
       
