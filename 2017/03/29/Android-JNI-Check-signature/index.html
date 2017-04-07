@@ -102,7 +102,7 @@ public static String getSignature(Context context)
 {
     try {
         /** 通过包管理器获得指定包名包含签名的包信">
-<meta property="og:updated_time" content="2017-04-07T12:01:18.250Z">
+<meta property="og:updated_time" content="2017-04-07T12:16:54.871Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android Native 层校验应用签名并破解">
 <meta name="twitter:description" content="前言
@@ -441,7 +441,7 @@ if (strcmp(c_msg, RELEASE_SIGN) == 0){
 </code></pre><p>}</p>
 <p>RELEASE_SIGN是在Java层获取得到的Sign，C_msg 就是Native层获取的Sign了，通过比较比较两个Sign做出不同的逻辑，这里如果比较不成功就返回“退出应用”字符串。</p>
 <p><strong>修改Native层逻辑</strong><br>其实在Native层做校验也不是很安全的，懂点ARM汇编的分分钟就破解了，接下来看看怎么修改Native层逻辑。</p>
-<p>这里用使用到一个强大的反编译软件IDA Pro，</p>
+<p>这里用使用到一个强大的反编译软件IDA Pro，这款软件在逆向界的威望不用多说了，具体的使用可以阅读《IDA Pro指南》。</p>
 
       
     </div>

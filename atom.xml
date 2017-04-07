@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-04-07T12:01:18.250Z</updated>
+  <updated>2017-04-07T12:16:54.871Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2017/03/29/Android-JNI-Check-signature/"/>
     <id>http://yoursite.com/2017/03/29/Android-JNI-Check-signature/</id>
     <published>2017-03-29T04:01:16.000Z</published>
-    <updated>2017-04-07T12:01:18.250Z</updated>
+    <updated>2017-04-07T12:16:54.871Z</updated>
     
     <content type="html"><![CDATA[<p><strong>前言</strong></p>
 <p>为了防止应用被反编译，在java层做sign的校对是不可靠的，反编译通过搜索“signatures”关键字就能找到程序的校对代码，所以把sign的校验放在native层会比较可靠。</p>
@@ -77,7 +77,7 @@ if (strcmp(c_msg, RELEASE_SIGN) == 0){
 </code></pre><p>}</p>
 <p>RELEASE_SIGN是在Java层获取得到的Sign，C_msg 就是Native层获取的Sign了，通过比较比较两个Sign做出不同的逻辑，这里如果比较不成功就返回“退出应用”字符串。</p>
 <p><strong>修改Native层逻辑</strong><br>其实在Native层做校验也不是很安全的，懂点ARM汇编的分分钟就破解了，接下来看看怎么修改Native层逻辑。</p>
-<p>这里用使用到一个强大的反编译软件IDA Pro，</p>
+<p>这里用使用到一个强大的反编译软件IDA Pro，这款软件在逆向界的威望不用多说了，具体的使用可以阅读《IDA Pro指南》。</p>
 ]]></content>
     
     <summary type="html">
